@@ -1,5 +1,4 @@
 package id.sch.smktelkom_mlg.learn.intent3;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +18,21 @@ public class MainActivity extends AppCompatActivity {
                 dialPhoneNumber("085736755074");
             }
         });
+
+        findViewById(R.id.imageViewSMS).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                composeSmsMessage("Pesan Dari SMK Telkom Malang");
+            }
+        });
+    }
+
+    public void composeSmsMessage(String message) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra("sms_body", message);
+        if (intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
     }
 
     public void dialPhoneNumber(String phoneNumber) {
